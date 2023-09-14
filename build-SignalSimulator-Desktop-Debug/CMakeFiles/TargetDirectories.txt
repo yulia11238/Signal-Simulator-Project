@@ -1,0 +1,8 @@
+/home/yulia/Project/build-SignalSimulator-Desktop-Debug/CMakeFiles/SignalSimulator.dir
+/home/yulia/Project/build-SignalSimulator-Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/yulia/Project/build-SignalSimulator-Desktop-Debug/CMakeFiles/rebuild_cache.dir
+/home/yulia/Project/build-SignalSimulator-Desktop-Debug/CMakeFiles/list_install_components.dir
+/home/yulia/Project/build-SignalSimulator-Desktop-Debug/CMakeFiles/install.dir
+/home/yulia/Project/build-SignalSimulator-Desktop-Debug/CMakeFiles/install/local.dir
+/home/yulia/Project/build-SignalSimulator-Desktop-Debug/CMakeFiles/install/strip.dir
+/home/yulia/Project/build-SignalSimulator-Desktop-Debug/CMakeFiles/SignalSimulator_autogen.dir
