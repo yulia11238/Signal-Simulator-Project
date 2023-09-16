@@ -1,12 +1,16 @@
 #include "widget.h"
-#include "./ui_widget.h"
+#include "ui_widget.h"
 #include "signalgenerator.h"
 
 Widget::Widget(QWidget *parent)
-    : QWidget(parent)
-    , ui(new Ui::Widget)
+    : QWidget(parent) , ui(new Ui::Widget)
 {
     ui->setupUi(this);
+
+    // Set up the connections
+    connect(ui->generateButton, SIGNAL(clicked()), this, SLOT(on_generateButton_clicked()));
+    connect(ui->frequencySlider, SIGNAL(valueChanged(int)), this, SLOT(on_frequencySlider_valueChanged(int)));
+    connect(ui->amplitudeSlider, SIGNAL(valueChanged(int)), this, SLOT(on_amplitudeSlider_valueChanged(int)));
 }
 
 Widget::~Widget()
@@ -24,13 +28,17 @@ void Widget::on_generateButton_clicked()
     generator.setAmplitude(amplitude);
     std::vector<double> signal = generator.generateSignal(44100);
 
-    connect(ui->generateButton, SIGNAL(clicked()), this, SLOT(on_generateButton_clicked()));
-
-
+    // Display the generated signal in the QTextEdit
+    QString displayText;
+    for(double val : signal) {
+        displayText.append(QString::number(val) + "\n");
+    }
+    ui->signalDisplay->setPlainText(displayText);
 }
+
 void Widget::on_frequencySlider_valueChanged(int value)
 {
-    // Convert the slider's integer value to the desired frequency range. For example, 1-1000 Hz.
+    // Convert the slider's integer value to the desired frequency range
     double frequency = static_cast<double>(value);
     ui->frequencyInput->setText(QString::number(frequency));
 
@@ -39,13 +47,17 @@ void Widget::on_frequencySlider_valueChanged(int value)
     generator.setAmplitude(ui->amplitudeInput->text().toDouble()); // Use existing amplitude value
     std::vector<double> signal = generator.generateSignal(44100);
 
-    // Process/display the signal
-    connect(ui->frequencySlider, SIGNAL(valueChanged(int)), this, SLOT(on_frequencySlider_valueChanged(int)));
+    // Display the generated signal in the QTextEdit
+    QString displayText;
+    for(double val : signal) {
+        displayText.append(QString::number(val) + "\n");
+    }
+    ui->signalDisplay->setPlainText(displayText);
 }
 
 void Widget::on_amplitudeSlider_valueChanged(int value)
 {
-    // Convert the slider's integer value to the desired amplitude range. For example, 0-1.
+    // Convert the slider's integer value to the desired amplitude range
     double amplitude = static_cast<double>(value) / 100.0; // Convert to 0-1 range
     ui->amplitudeInput->setText(QString::number(amplitude));
 
@@ -54,6 +66,10 @@ void Widget::on_amplitudeSlider_valueChanged(int value)
     generator.setAmplitude(amplitude);
     std::vector<double> signal = generator.generateSignal(44100);
 
-    // Process/display the signal
-    connect(ui->amplitudeSlider, SIGNAL(valueChanged(int)), this, SLOT(on_amplitudeSlider_valueChanged(int)));
+    // Display the generated signal in the QTextEdit
+    QString displayText;
+    for(double val : signal) {
+        displayText.append(QString::number(val) + "\n");
+    }
+    ui->signalDisplay->setPlainText(displayText);
 }

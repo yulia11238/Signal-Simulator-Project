@@ -1,5 +1,5 @@
 #include "fft_processor.h"
-#include <cmath> // For cos() and other math functions
+#include <cmath>
 
 #ifndef M_PI
 #define M_PI (3.14159265358979323846)
@@ -14,9 +14,21 @@ FFTProcessor::~FFTProcessor() {
 }
 
 std::vector<double> FFTProcessor::applyFFT(const std::vector<double>& signal) {
-    // Your FFT application code using Kiss FFT here.
-    // Convert the time-domain signal into frequency components.
-    // For now, just return the same signal. Replace this with actual FFT results.
+    std::vector<kiss_fft_cpx> out(m_sampleSize);
+    kiss_fft(m_cfg, reinterpret_cast<const kiss_fft_cpx*>(signal.data()), out.data());
+
+    std::vector<double> magnitude = computeMagnitude(out);
+    return magnitude;
+}
+
+std::vector<double> FFTProcessor::applyInverseFFT(const std::vector<kiss_fft_cpx>& freqData) {
+    std::vector<kiss_fft_cpx> timeData(m_sampleSize);
+    kiss_fft(m_cfg, freqData.data(), timeData.data());
+
+    std::vector<double> signal(m_sampleSize);
+    for (int i = 0; i < m_sampleSize; ++i) {
+        signal[i] = timeData[i].r; // consider only real part
+    }
     return signal;
 }
 
@@ -24,4 +36,12 @@ void FFTProcessor::applyWindow(std::vector<double>& signal) {
     for (int i = 0; i < m_sampleSize; ++i) {
         signal[i] *= 0.54 - 0.46 * cos(2 * M_PI * i / (m_sampleSize - 1));
     }
+}
+
+std::vector<double> FFTProcessor::computeMagnitude(const std::vector<kiss_fft_cpx>& freqData) {
+    std::vector<double> magnitude(m_sampleSize);
+    for (int i = 0; i < m_sampleSize; ++i) {
+        magnitude[i] = sqrt(freqData[i].r * freqData[i].r + freqData[i].i * freqData[i].i);
+    }
+    return magnitude;
 }
