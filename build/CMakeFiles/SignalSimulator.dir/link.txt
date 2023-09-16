@@ -1,1 +1,0 @@
-/bin/c++ CMakeFiles/SignalSimulator.dir/SignalSimulator_autogen/mocs_compilation.cpp.o -o SignalSimulator   -L/home/yulia/kissfft  -Wl,-rpath,/home/yulia/kissfft: /usr/lib/libQt6Widgets.so.6.5.2 -lkissfft /usr/lib/libQt6Gui.so.6.5.2 /usr/lib/libQt6Core.so.6.5.2 /usr/lib/libGLX.so /usr/lib/libOpenGL.so 
