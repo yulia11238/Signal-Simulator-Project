@@ -1,20 +1,20 @@
 #ifndef SIGNALGENERATOR_H
 #define SIGNALGENERATOR_H
 
-#include <vector>
 #include <cmath>
+#include <vector>
 
-class SignalGenerator
-{
+// Class to generate signals with adjustable frequency and amplitude
+class SignalGenerator {
 public:
-    SignalGenerator();
-    void setFrequency(double freq);
-    void setAmplitude(double amp);
-    std::vector<double> generateSignal(int numSamples);
+  SignalGenerator(); // Initialize the signal generator
+  void setFrequency(double freq);
+  void setAmplitude(double amp);
+  std::vector<double> generateSignal(int numSamples);
 
 private:
-    double frequency;
-    double amplitude;
+  double frequency; // Current frequency of the generated signal
+  double amplitude; // Current amplitude of the generated signal
 };
 
 #endif // SIGNALGENERATOR_H
