@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>470</width>
-    <height>502</height>
+    <width>800</width>
+    <height>721</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,9 +15,33 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QWidget" name="chartPlaceholder" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>631</width>
+       <height>441</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="amplitudeValue">
+     <property name="text">
+      <string>Amplitude</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QSlider" name="amplitudeSlider">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="frequencyValue">
+     <property name="text">
+      <string>Frequency</string>
      </property>
     </widget>
    </item>
@@ -28,27 +52,8 @@
      </property>
     </widget>
    </item>
-   <item>
-    <widget class="QLineEdit" name="amplitudeInput"/>
-   </item>
-   <item>
-    <widget class="QLineEdit" name="frequencyInput"/>
-   </item>
-   <item>
-    <widget class="QPushButton" name="generateButton">
-     <property name="text">
-      <string>Run</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QTextEdit" name="signalDisplay"/>
-   </item>
   </layout>
  </widget>
- <tabstops>
-  <tabstop>generateButton</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>
